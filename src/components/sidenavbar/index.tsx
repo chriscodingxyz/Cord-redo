@@ -6,16 +6,18 @@ import * as colors from "../../colors";
 import Arrow from "../../images/arrow-icon.png";
 import SearchWhite from "../../images/search-icon-white.png";
 
+interface NavIconProps {
+  arrow?: boolean;
+  search?: boolean;
+}
+
 export default function SideNavBar({
   activeSideBar,
 }: {
   activeSideBar: boolean;
 }) {
-  /* Write the necessary functions to show/hide the side bar on mobile devices */
-
   return (
     <SideNavBarCont activeSideBar={activeSideBar}>
-      {/* Implement a hamburger icon slide in effect for mobile devices */}
       <SideNavMainLink
         className="menu_nav_link main_nav_link"
         to="/"
@@ -89,24 +91,60 @@ const SideNavBarCont = styled.div<{ activeSideBar: boolean }>`
 `;
 
 const SideNavMainLink = styled(Link)`
-  position: relative;
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 25px 35px;
   font-size: 1.6em;
   font-weight: 700;
   color: white;
+  background-color: ${colors.sideNavBar};
+
+  &:hover {
+    background-color: ${colors.sideNavBarHover};
+  }
+  &.active {
+    background-color: ${colors.primaryColor};
+  }
 `;
 
-const NavIcon = styled.div`
-  position: absolute;
-  right: 35px;
-  top: 50%;
+const NavIcon = styled.div<NavIconProps>`
+  width: 29px;
+  height: 29px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: ${(props) =>
+    props.arrow
+      ? `url(${Arrow})`
+      : props.search
+      ? `url(${SearchWhite})`
+      : "none"};
 `;
 
-const SideNavHeader = styled.div``;
+const SideNavHeader = styled.div`
+  padding: 25px 35px 15px;
+`;
 
-const HeaderText = styled.div``;
+const HeaderText = styled.div`
+  font-size: 1.6em;
+  font-weight: 400;
+  color: white;
+  padding-bottom: 15px;
+  border-bottom: 1px solid ${colors.fontColor};
+`;
 
 const NavLink = styled(Link)`
   display: block;
+  padding: 10px 35px;
+  font-size: 1.3em;
+  color: ${colors.fontColor};
+  text-decoration: none;
+
+  &:hover {
+    background-color: ${colors.sideNavBarHover};
+  }
+  &.active {
+    background-color: ${colors.primaryColor};
+  }
 `;
