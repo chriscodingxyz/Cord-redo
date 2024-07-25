@@ -74,7 +74,7 @@ export default function SideNavBar() {
 
 const SideNavBarCont = styled.div<{ activeSideBar: boolean }>`
   position: fixed;
-  z-index: 9;
+  z-index: 99999;
   width: 260px;
   height: 100%;
   background-color: ${colors.sideNavBar};

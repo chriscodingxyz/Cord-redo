@@ -26,10 +26,11 @@ export default function SearchFilters({
   return (
     <FiltersWrapper>
       <SearchFiltersCont className="search_inputs_cont" marginBottom>
+        Search filters cont
         {/* Implement a SearchBar component and use it for both the keyword and the year inputs */}
       </SearchFiltersCont>
       <SearchFiltersCont>
-        <CategoryTitle>Movies</CategoryTitle>
+        <CategoryTitle>Search Filter Category title</CategoryTitle>
         {/* Implement a component called "ExpandableFilters" and use it for the filter categories */}
       </SearchFiltersCont>
     </FiltersWrapper>

@@ -13,8 +13,8 @@ type MovieListProps = {
 export default function MovieList({ movies, genres }: MovieListProps) {
   return (
     <MoviesWrapper>
-      {movies ? "yesMovies" : "noMovies"}
-      {genres ? "yesGenres" : "noGenres"}
+      {/* {movies ? "yesMovies" : "noMovies"}
+      {genres ? "yesGenres" : "noGenres"} */}
       {movies.map((movie) => (
         <MovieItem key={movie.id} movie={movie} />
       ))}

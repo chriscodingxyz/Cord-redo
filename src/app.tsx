@@ -10,19 +10,19 @@ import "./css/app.css";
 import { useMovieContext } from "./contexts/MovieContext";
 
 export default function App() {
-  const { activeSideBar, toggleSideBar } = useMovieContext();
+  // const { activeSideBar, toggleSideBar } = useMovieContext();
 
   return (
     <Router>
       <PageContainer>
         <SideNavBar />
         <ContentWrapper>
-          <NavToggleButton
+          {/* <NavToggleButton
             onClick={toggleSideBar}
             activeSideBar={activeSideBar}
           >
-            {activeSideBar ? "Hide Sidebar" : "Show Sidebar"}
-          </NavToggleButton>
+            {activeSideBar ? "✕" : "☰"}
+          </NavToggleButton> */}
           <Switch>
             <Route path="/discover" component={Discover} />
           </Switch>
@@ -48,11 +48,18 @@ const ContentWrapper = styled.main`
   }
 `;
 
-const NavToggleButton = styled.button<{ activeSideBar: boolean }>`
-  margin-left: ${({ activeSideBar }) => (activeSideBar ? "260px" : "45px")};
-  transition: margin-left 0.3s ease-in-out;
+// const NavToggleButton = styled.button<{ activeSideBar: boolean }>`
+//   position: fixed;
+//   z-index: 10;
+//   top: 45px;
+//   background-color: transparent;
+//   border: none;
+//   font-size: 2.5rem;
 
-  @media (min-width: 768px) {
-    opacity: 0;
-  }
-`;
+//   margin-left: ${({ activeSideBar }) => (activeSideBar ? "260px" : "45px")};
+//   transition: margin-left 0.3s ease-in-out;
+
+//   @media (min-width: 768px) {
+//     opacity: 0;
+//   }
+// `;

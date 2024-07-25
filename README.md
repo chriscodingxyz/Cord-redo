@@ -65,3 +65,4 @@ Please create a git repository of your solution and send the link to your contac
 6. Sidebar components styled
 7. Updated whole app, made MovieContext. Also temporarily fixed most of the errors by adding any type (temporary)
 8. Fixed some issues with Genres, as there is a WHOLE genre list, and a movie specific one. Also the movie specific ones only mentioned Genre ID not name. Movielist and MovieItems have been styled. All filter/search components next. (padding/margin will still be updated towards the end)
+9. Deleted MobileTitle component and extracted away a new component, MobileHeader.tsx, this will allow a title prop to be passed for different pages. This also places the open/close sidebarnav button to the left of it. Also I decided to add a white background and fix it to the top for when users scroll, they always have option to display sidebar. Also updated sidebar z-index after realising an error
