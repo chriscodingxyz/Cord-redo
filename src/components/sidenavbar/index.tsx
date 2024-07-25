@@ -5,17 +5,15 @@ import { NavLink as Link } from "react-router-dom";
 import * as colors from "../../colors";
 import Arrow from "../../images/arrow-icon.png";
 import SearchWhite from "../../images/search-icon-white.png";
+import { useMovieContext } from "../../contexts/MovieContext";
 
 interface NavIconProps {
   arrow?: boolean;
   search?: boolean;
 }
 
-export default function SideNavBar({
-  activeSideBar,
-}: {
-  activeSideBar: boolean;
-}) {
+export default function SideNavBar() {
+  const { activeSideBar } = useMovieContext();
   return (
     <SideNavBarCont activeSideBar={activeSideBar}>
       <SideNavMainLink

@@ -7,31 +7,15 @@ import SideNavBar from "./components/sidenavbar";
 import Discover from "./pages/discover";
 
 import "./css/app.css";
+import { useMovieContext } from "./contexts/MovieContext";
 
 export default function App() {
-  const [activeSideBar, setActiveSideBar] = useState(false);
-
-  // noticed when I was moving around window width, it would still show, this makes it auto close inbetween
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 768) {
-        setActiveSideBar(false);
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => window.removeEventListener("resize", handleResize);
-  }, [setActiveSideBar]);
-
-  const toggleSideBar = () => {
-    setActiveSideBar(!activeSideBar);
-  };
+  const { activeSideBar, toggleSideBar } = useMovieContext();
 
   return (
     <Router>
       <PageContainer>
-        <SideNavBar activeSideBar={activeSideBar} />
+        <SideNavBar />
         <ContentWrapper>
           <NavToggleButton
             onClick={toggleSideBar}
@@ -50,7 +34,6 @@ export default function App() {
 
 const PageContainer = styled.main`
   overflow-x: hidden;
-  border: 4px solid pink;
   display: flex;
   min-height: 100dvh;
 `;
@@ -59,7 +42,6 @@ const ContentWrapper = styled.main`
   flex-grow: 1;
   margin-left: 260px;
   transition: margin-left 0.3s ease-in-out;
-  border: 4px solid red;
 
   @media screen and (max-width: 768px) {
     margin-left: 0;
