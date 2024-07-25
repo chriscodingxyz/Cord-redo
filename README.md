@@ -61,3 +61,4 @@ Please create a git repository of your solution and send the link to your contac
 2. updated evertyhing to box-sizing: border box (more accepted standard)
 3. Filled up fetcher data using axios
 4. Added all types from movies/genres into lib/types.ts
+5. Media queries and activeSideBar state for displaying/hiding sidenavbar. Also some spacing/margin updated. For now I will keep most state within app.tsx and move down or put into context/local storage later if needed

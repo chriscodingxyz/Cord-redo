@@ -6,13 +6,15 @@ import * as colors from "../../colors";
 import Arrow from "../../images/arrow-icon.png";
 import SearchWhite from "../../images/search-icon-white.png";
 
-export default function SideNavBar() {
-  const [activeSideBar] = useState();
-
+export default function SideNavBar({
+  activeSideBar,
+}: {
+  activeSideBar: boolean;
+}) {
   /* Write the necessary functions to show/hide the side bar on mobile devices */
 
   return (
-    <SideNavBarCont className={activeSideBar && "visible"}>
+    <SideNavBarCont activeSideBar={activeSideBar}>
       {/* Implement a hamburger icon slide in effect for mobile devices */}
       <SideNavMainLink
         className="menu_nav_link main_nav_link"
@@ -70,12 +72,20 @@ export default function SideNavBar() {
   );
 }
 
-const SideNavBarCont = styled.div`
+const SideNavBarCont = styled.div<{ activeSideBar: boolean }>`
   position: fixed;
   z-index: 9;
   width: 260px;
   height: 100%;
   background-color: ${colors.sideNavBar};
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease-in-out;
+
+  @media screen and (max-width: 768px) {
+    transform: ${({ activeSideBar }) =>
+      activeSideBar ? "translateX(0)" : "translateX(-260px)"};
+  }
 `;
 
 const SideNavMainLink = styled(Link)`
