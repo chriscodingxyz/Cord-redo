@@ -30,6 +30,10 @@ interface MovieContextType {
   searchMovies: (keyword: string, year: number) => Promise<void>;
   setActiveSideBar: (active: boolean) => void;
   toggleSideBar: () => void;
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+  year: number | null;
+  setYear: (year: number) => void;
 }
 
 const MovieContext = createContext<MovieContextType | undefined>(undefined);
@@ -39,6 +43,8 @@ interface MovieProviderProps {
 }
 
 export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [year, setYear] = useState<number | null>(null);
   const [activeSideBar, setActiveSideBar] = useState(false);
   const [genres, setGenres] = useState<Genre[]>([]);
   const [languageOptions, setLanguageOptions] = useState<
@@ -173,6 +179,10 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
         searchMovies,
         setActiveSideBar,
         toggleSideBar,
+        setSearchQuery,
+        searchQuery,
+        year,
+        setYear,
       }}
     >
       {children}
