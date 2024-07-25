@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import styled, { GlobalStyleComponent, css } from "styled-components";
+import styled, { css } from "styled-components";
 
 import SideNavBar from "./components/sidenavbar";
 
@@ -29,4 +29,5 @@ const ContentWrapper = styled.main`
 
 const PageContainer = styled.main`
   overflow-x: hidden;
+  border: 4px solid pink;
 `;
