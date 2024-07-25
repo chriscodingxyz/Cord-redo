@@ -64,3 +64,4 @@ Please create a git repository of your solution and send the link to your contac
 5. Media queries and activeSideBar state for displaying/hiding sidenavbar. Also some spacing/margin updated. For now I will keep most state within app.tsx and move down or put into context/local storage later if needed
 6. Sidebar components styled
 7. Updated whole app, made MovieContext. Also temporarily fixed most of the errors by adding any type (temporary)
+8. Fixed some issues with Genres, as there is a WHOLE genre list, and a movie specific one. Also the movie specific ones only mentioned Genre ID not name. Movielist and MovieItems have been styled. All filter/search components next. (padding/margin will still be updated towards the end)

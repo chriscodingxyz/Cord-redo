@@ -2,21 +2,27 @@ import React from "react";
 import styled from "styled-components";
 
 import MovieItem from "../movieitem";
+import { Genre, MovieSummary } from "../../lib/types";
 
 // Add types for the props of 'MovieList'
 type MovieListProps = {
-  movies: any;
-  genres: any;
+  movies: MovieSummary[];
+  genres: Genre[];
 };
 
 export default function MovieList({ movies, genres }: MovieListProps) {
   return (
     <MoviesWrapper>
-      {/* Finish the MovieItem component and use it here to display the movie results */}
+      {movies ? "yesMovies" : "noMovies"}
+      {genres ? "yesGenres" : "noGenres"}
+      {movies.map((movie) => (
+        <MovieItem key={movie.id} movie={movie} />
+      ))}
     </MoviesWrapper>
   );
 }
 
 const MoviesWrapper = styled.div`
-  position: relative;
+  display: flex;
+  flex-direction: column;
 `;

@@ -10,7 +10,7 @@ import { useMovieContext } from "../../contexts/MovieContext";
 
 export default function Discover() {
   const {
-    genreOptions,
+    genres,
     languageOptions,
     ratingOptions,
     totalCount,
@@ -21,6 +21,7 @@ export default function Discover() {
   } = useMovieContext();
 
   if (isLoading) return <div>Loading...</div>;
+  // if (!genres) return <div>Isssues getting genres...</div>;
   if (error) return <div>Error: {error}</div>;
 
   return (
@@ -28,15 +29,16 @@ export default function Discover() {
       <MobilePageTitle>Discover</MobilePageTitle>
       <MovieFilters>
         <SearchFilters
-          genres={genreOptions}
+          genres={genres}
           ratings={ratingOptions}
           languages={languageOptions}
           searchMovies={searchMovies}
         />
+        FILTERS TESTING
       </MovieFilters>
       <MovieResults>
         {totalCount > 0 && <TotalCounter>{totalCount} results</TotalCounter>}
-        <MovieList movies={results || []} genres={genreOptions || []} />
+        <MovieList movies={results || []} genres={genres} />
       </MovieResults>
     </DiscoverWrapper>
   );
@@ -52,6 +54,16 @@ const TotalCounter = styled.div`
 
 const MovieResults = styled.div``;
 
-const MovieFilters = styled.div``;
+const MovieFilters = styled.div`
+  margin-bottom: 20px;
+`;
+const MobilePageTitle = styled.header`
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: ${colors.primaryColor};
 
-const MobilePageTitle = styled.header``;
+  @media (min-width: 768px) {
+    display: none;
+  }
+`;

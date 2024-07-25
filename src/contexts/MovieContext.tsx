@@ -14,7 +14,7 @@ import {
 } from "../lib/types";
 
 interface MovieContextType {
-  genreOptions: Genre[];
+  genres: Genre[];
   languageOptions: { id: string; name: string }[];
   ratingOptions: { id: number; name: number }[];
   totalCount: number;
@@ -23,6 +23,7 @@ interface MovieContextType {
   isLoading: boolean;
   error: string | null;
   activeSideBar: boolean;
+  getGenreNames: (genreIds: number[]) => string;
   searchPopularMovies: () => Promise<void>;
   searchGenres: () => Promise<void>;
   searchMovieByID: (movieId: number) => Promise<void>;
@@ -39,8 +40,7 @@ interface MovieProviderProps {
 
 export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
   const [activeSideBar, setActiveSideBar] = useState(false);
-
-  const [genreOptions, setGenreOptions] = useState<Genre[]>([]);
+  const [genres, setGenres] = useState<Genre[]>([]);
   const [languageOptions, setLanguageOptions] = useState<
     { id: string; name: string }[]
   >([]);
@@ -61,7 +61,15 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
     const fetchInitialData = async () => {
       setIsLoading(true);
       try {
-        await Promise.all([searchPopularMovies(), searchGenres()]);
+        const [popMovies, fetchedGenres] = await Promise.all([
+          searchPopularMovies(),
+          searchGenres(),
+        ]);
+        console.log(
+          "contextinitial ====>> popular & genres",
+          popMovies,
+          fetchedGenres
+        );
       } catch (error) {
         console.error("Error fetching initial data:", error);
         setError("Failed to load initial data");
@@ -74,35 +82,32 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 768) {
-        setActiveSideBar(false);
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    console.log("Genres updated:", genres);
+  }, [genres]);
 
   const searchPopularMovies = async () => {
     try {
-      const result: MovieListResponse = await fetcher.getPopularMovies();
+      const result = await fetcher.getPopularMovies();
       setResults(result.results);
       setTotalCount(result.total_results);
+      return result;
     } catch (error) {
       console.error("Error fetching popular movies:", error);
       setError("Failed to fetch popular movies");
+      throw error;
     }
   };
 
   const searchGenres = async () => {
     try {
-      const result: { genres: Genre[] } = await fetcher.getMovieGenres();
-      setGenreOptions(result.genres);
+      const genres = await fetcher.getMovieGenres();
+      console.log("🎣 CONTEXT[searchGenres] ===>>>", genres);
+      setGenres(genres);
+      return genres;
     } catch (error) {
       console.error("Error fetching genres:", error);
       setError("Failed to fetch genres");
+      throw error;
     }
   };
 
@@ -110,6 +115,7 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
     try {
       const result: MovieDetails = await fetcher.getMovieByID(movieId);
       setMovieDetails(result);
+      return result;
     } catch (error) {
       console.error("Error fetching movie details:", error);
       setError("Failed to fetch movie details");
@@ -121,16 +127,25 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
       const result: MovieListResponse = await fetcher.getMovies(keyword, year);
       setResults(result.results);
       setTotalCount(result.total_results);
+      return result;
     } catch (error) {
       console.error("Error searching movies:", error);
       setError("Failed to search movies");
     }
   };
 
+  const getGenreNames = (genreIds: number[]): string => {
+    if (!genres || genres.length === 0) return "";
+    return genreIds
+      .map((id) => genres.find((genre) => genre.id === id)?.name)
+      .filter(Boolean)
+      .join(" | ");
+  };
+
   return (
     <MovieContext.Provider
       value={{
-        genreOptions,
+        genres,
         languageOptions,
         ratingOptions,
         totalCount,
@@ -139,6 +154,7 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
         isLoading,
         error,
         activeSideBar,
+        getGenreNames,
         searchPopularMovies,
         searchGenres,
         searchMovieByID,
