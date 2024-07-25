@@ -85,6 +85,18 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
     console.log("Genres updated:", genres);
   }, [genres]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setActiveSideBar(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const searchPopularMovies = async () => {
     try {
       const result = await fetcher.getPopularMovies();

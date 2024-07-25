@@ -11,20 +11,23 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({ title }) => {
   const { activeSideBar, toggleSideBar } = useMovieContext();
 
   return (
-    <HeaderWrapper>
-      <NavToggleButton onClick={toggleSideBar}>
-        {activeSideBar ? "✕" : "☰"}
+    <HeaderWrapper activeSideBar={activeSideBar}>
+      <NavToggleButton activeSideBar={activeSideBar} onClick={toggleSideBar}>
+        {"☰"}
       </NavToggleButton>
       <PageTitle>{title}</PageTitle>
     </HeaderWrapper>
   );
 };
 
-const HeaderWrapper = styled.header`
+const HeaderWrapper = styled.header<{ activeSideBar: boolean }>`
   position: fixed;
   top: 0;
   left: 45px;
-  right: 0;
+  transition: padding 0.3s ease-in-out;
+  padding-left: ${(props) => (props.activeSideBar ? "215px" : "0px")};
+
+  right: 45px;
   display: flex;
   align-items: center;
   /* padding: 10px 20px; */
@@ -36,12 +39,15 @@ const HeaderWrapper = styled.header`
   }
 `;
 
-const NavToggleButton = styled.button`
+const NavToggleButton = styled.button<{ activeSideBar: boolean }>`
   background-color: transparent;
   border: none;
   font-size: 3rem;
-  margin-right: 15px;
+  margin-right: 5px;
   cursor: pointer;
+  transform: ${(props) =>
+    props.activeSideBar ? "rotate(90deg)" : "rotate(0)"};
+  transition: transform 0.3s ease-in-out;
 `;
 
 const PageTitle = styled.h1`
