@@ -32,7 +32,7 @@ interface MovieContextType {
   toggleSideBar: () => void;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
-  year: number | null;
+  year: number;
   setYear: (year: number) => void;
 }
 
@@ -44,7 +44,7 @@ interface MovieProviderProps {
 
 export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [year, setYear] = useState<number | null>(null);
+  const [year, setYear] = useState<number>(0);
   const [activeSideBar, setActiveSideBar] = useState(false);
   const [genres, setGenres] = useState<Genre[]>([]);
   const [languageOptions, setLanguageOptions] = useState<

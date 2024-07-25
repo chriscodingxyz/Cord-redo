@@ -26,8 +26,7 @@ export default function SearchFilters({
   return (
     <FiltersWrapper>
       <SearchFiltersCont className="search_inputs_cont" marginBottom>
-        search bar will go here <SearchBar />
-        {/* Implement a SearchBar component and use it for both the keyword and the year inputs */}
+        <SearchBar />
       </SearchFiltersCont>
       <SearchFiltersCont>
         <CategoryTitle>Search Filter Category title</CategoryTitle>
@@ -39,6 +38,11 @@ export default function SearchFilters({
 
 const FiltersWrapper = styled.div`
   position: relative;
+  width: 250px;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 
 const SearchFiltersCont = styled.div<SearchFiltersContProps>`
