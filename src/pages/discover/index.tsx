@@ -29,7 +29,6 @@ export default function Discover() {
     <>
       <MobileHeader title="Discover" />
       <DiscoverWrapper>
-        {/* <MobilePageTitle>Discover</MobilePageTitle> */}
         <MovieFilters>
           <SearchFilters
             genres={genres}
@@ -48,7 +47,14 @@ export default function Discover() {
 }
 
 const DiscoverWrapper = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 15px;
   padding: 45px 45px;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
 `;
 
 const TotalCounter = styled.div`
@@ -58,6 +64,7 @@ const TotalCounter = styled.div`
 const MovieResults = styled.div``;
 
 const MovieFilters = styled.div`
+  margin-top: 20px;
   margin-bottom: 20px;
 `;
 // const MobilePageTitle = styled.header`
