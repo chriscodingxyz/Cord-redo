@@ -20,7 +20,7 @@ export default function SearchBar() {
     if (!searchQuery) {
       searchPopularMovies();
     }
-  }, [searchQuery, searchPopularMovies]);
+  }, [searchQuery]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newQuery = e.target.value;

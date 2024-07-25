@@ -22,7 +22,6 @@ export default function Discover() {
   } = useMovieContext();
 
   if (isLoading) return <div>Loading...</div>;
-  // if (!genres) return <div>Isssues getting genres...</div>;
   if (error) return <div>Error: {error}</div>;
 
   return (
@@ -31,10 +30,10 @@ export default function Discover() {
       <DiscoverWrapper>
         <MovieFilters>
           <SearchFilters
-            genres={genres}
-            ratings={ratingOptions}
-            languages={languageOptions}
-            searchMovies={searchMovies}
+          // genres={genres}
+          // ratings={ratingOptions}
+          // languages={languageOptions}
+          // searchMovies={searchMovies}
           />
         </MovieFilters>
         <MovieResults>

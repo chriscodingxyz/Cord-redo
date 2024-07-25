@@ -70,3 +70,4 @@ Please create a git repository of your solution and send the link to your contac
 11. Getting closer to final layout of discover, currently have a flex display style for movie content and filters. I will likely also make the filters stay fixed on the screen, both for row and column displays.
 12. Building out the search logic for now, adding values in context so it stays there on any re-renders
 13. Added Search feature, will not search if ONLY year. Will not make a new search if year does not have 4 numbers. If search is cleared, it fetches popular movies. Will add some debounce or see if there is a more modern method online
+14. Partiall built out ExpandableFilters, Checkbox, mapped over genres only for now. I have some type issues in MovieContext I will fix after this push.

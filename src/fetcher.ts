@@ -70,3 +70,15 @@ export const getMovies = async (keyword: string, year = 0, page = 1) => {
     return handleError(error as AxiosError);
   }
 };
+
+export const getLanguages = async () => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/configuration/languages?api_key=${MOVIE_DB_KEY}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching languages:", error);
+    throw error;
+  }
+};

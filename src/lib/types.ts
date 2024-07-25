@@ -83,3 +83,9 @@ export interface SpokenLanguage {
   iso_639_1: string;
   name: string;
 }
+
+export interface Languages {
+  iso_639_1: string;
+  english_name: string;
+  name: string;
+}
