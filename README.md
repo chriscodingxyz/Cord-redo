@@ -59,3 +59,4 @@ Please create a git repository of your solution and send the link to your contac
 
 1. updated scripts for legacy and installed legacy deps
 2. updated evertyhing to box-sizing: border box (more accepted standard)
+3. Filled up fetcher data using axios
