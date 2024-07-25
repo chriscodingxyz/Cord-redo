@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import * as colors from "../../colors";
+
 export default function CheckBox({ value }: { value: string }) {
   return (
     <CheckboxCont>
@@ -12,8 +14,9 @@ export default function CheckBox({ value }: { value: string }) {
 
 const CheckboxCont = styled.div`
   /* position: relative; */
-  border: 2px solid pink;
   display: flex;
+  gap: 10px;
+  color: ${colors.fontColor};
 
   /* align-items: center; */
 `;

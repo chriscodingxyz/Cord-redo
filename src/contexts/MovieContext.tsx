@@ -11,6 +11,7 @@ import {
   MovieDetails,
   Genre,
   MovieListResponse,
+  Languages,
 } from "../lib/types";
 
 interface MovieContextType {
@@ -26,7 +27,7 @@ interface MovieContextType {
   getGenreNames: (genreIds: number[]) => string;
   searchPopularMovies: () => Promise<void>;
   searchGenres: () => Promise<void>;
-  searchMovieByID: (movieId: number) => Promise<void>;
+  searchMovieByID: (id: number) => Promise<void>;
   searchMovies: (keyword: string, year: number) => Promise<void>;
   setActiveSideBar: (active: boolean) => void;
   toggleSideBar: () => void;
@@ -34,6 +35,8 @@ interface MovieContextType {
   setSearchQuery: (query: string) => void;
   year: number;
   setYear: (year: number) => void;
+  languages: Languages[];
+  setLanguages: (languages: Languages[]) => void;
 }
 
 const MovieContext = createContext<MovieContextType | undefined>(undefined);
@@ -47,6 +50,7 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
   const [year, setYear] = useState<number>(0);
   const [activeSideBar, setActiveSideBar] = useState(false);
   const [genres, setGenres] = useState<Genre[]>([]);
+  const [languages, setLanguages] = useState<Languages[]>([]);
   const [languageOptions, setLanguageOptions] = useState<
     { id: string; name: string }[]
   >([]);
@@ -70,6 +74,7 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
         const [popMovies, fetchedGenres] = await Promise.all([
           searchPopularMovies(),
           searchGenres(),
+          //   searchLanguages(),
         ]);
         console.log(
           "contextinitial ====>> popular & genres",
@@ -103,12 +108,11 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const searchPopularMovies = async () => {
+  const searchPopularMovies = async (): Promise<void> => {
     try {
       const result = await fetcher.getPopularMovies();
       setResults(result.results);
       setTotalCount(result.total_results);
-      return result;
     } catch (error) {
       console.error("Error fetching popular movies:", error);
       setError("Failed to fetch popular movies");
@@ -116,12 +120,11 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
     }
   };
 
-  const searchGenres = async () => {
+  const searchGenres = async (): Promise<void> => {
     try {
       const genres = await fetcher.getMovieGenres();
       console.log("🎣 CONTEXT[searchGenres] ===>>>", genres);
       setGenres(genres);
-      return genres;
     } catch (error) {
       console.error("Error fetching genres:", error);
       setError("Failed to fetch genres");
@@ -129,28 +132,40 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
     }
   };
 
-  const searchMovieByID = async (movieId: number) => {
+  const searchMovieByID = async (movieId: number): Promise<void> => {
     try {
       const result: MovieDetails = await fetcher.getMovieByID(movieId);
       setMovieDetails(result);
-      return result;
     } catch (error) {
       console.error("Error fetching movie details:", error);
       setError("Failed to fetch movie details");
+      throw error;
     }
   };
 
-  const searchMovies = async (keyword: string, year: number) => {
+  const searchMovies = async (keyword: string, year: number): Promise<void> => {
     try {
       const result: MovieListResponse = await fetcher.getMovies(keyword, year);
       setResults(result.results);
       setTotalCount(result.total_results);
-      return result;
     } catch (error) {
       console.error("Error searching movies:", error);
       setError("Failed to search movies");
+      throw error;
     }
   };
+
+  //   const searchLanguages = async (): Promise<void> => {
+  //     try {
+  //       const languages = await fetcher.getLanguages();
+  //       console.log("🎣 CONTEXT[searchLanguages] ===>>>", languages);
+  //       setLanguages(languages);
+  //     } catch (error) {
+  //       console.error("Error fetching languages:", error);
+  //       setError("Failed to fetch languages");
+  //       throw error;
+  //     }
+  //   };
 
   const getGenreNames = (genreIds: number[]): string => {
     if (!genres || genres.length === 0) return "";
@@ -183,6 +198,8 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
         searchQuery,
         year,
         setYear,
+        languages,
+        setLanguages,
       }}
     >
       {children}

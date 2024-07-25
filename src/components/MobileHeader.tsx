@@ -23,15 +23,15 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({ title }) => {
 const HeaderWrapper = styled.header<{ activeSideBar: boolean }>`
   position: fixed;
   top: 0;
-  left: 45px;
+  left: 0;
   transition: padding 0.3s ease-in-out;
-  padding-left: ${(props) => (props.activeSideBar ? "215px" : "0px")};
+  padding-left: ${(props) => (props.activeSideBar ? "260px" : "15px")};
 
-  right: 45px;
+  right: 0;
   display: flex;
   align-items: center;
   /* padding: 10px 20px; */
-  background-color: white;
+  background-color: ${colors.lightBackground};
   z-index: 1000;
 
   @media (min-width: 768px) {
@@ -42,6 +42,7 @@ const HeaderWrapper = styled.header<{ activeSideBar: boolean }>`
 const NavToggleButton = styled.button<{ activeSideBar: boolean }>`
   background-color: transparent;
   border: none;
+  padding-left: 0;
   font-size: 3rem;
   margin-right: 5px;
   cursor: pointer;

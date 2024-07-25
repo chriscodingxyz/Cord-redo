@@ -54,6 +54,10 @@ const DiscoverWrapper = styled.div`
   @media (max-width: 1024px) {
     flex-direction: column;
   }
+
+  @media (max-width: 768px) {
+    padding: 45px 20px;
+  }
 `;
 
 const TotalCounter = styled.div`

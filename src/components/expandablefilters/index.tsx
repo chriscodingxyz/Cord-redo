@@ -33,16 +33,13 @@ export default function ExpandableFilters({
 }
 
 const ExpandableDiv = styled.div<{ isOpen: boolean }>`
-  border: 1px solid red;
   display: ${({ isOpen }) => (isOpen ? "block" : "none")};
 `;
 
 const TitleButtonWrapper = styled.div`
   display: flex;
-  border: 1px solid red;
   flex-direction: row;
   gap: 5px;
-  /* justify-content: space-between; */
   align-items: center;
 `;
 
