@@ -13,11 +13,6 @@ export default function MovieItem({ movie }: MovieItemProps) {
 
   const movieGenres = genres?.length > 0 ? getGenreNames(movie.genre_ids) : "";
 
-  // const truncateText = (text: string, maxLength: number) => {
-  //   if (text.length <= maxLength) return text;
-  //   return text.slice(0, maxLength) + "...";
-  // };
-
   return (
     <MovieItemWrapper>
       <LeftCont>
