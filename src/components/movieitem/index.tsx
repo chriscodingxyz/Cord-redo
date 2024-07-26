@@ -47,6 +47,10 @@ const LeftCont = styled.div`
     width: 100%;
     height: auto;
   }
+
+  @media (max-width: 768px) {
+    width: 150px;
+  }
 `;
 
 const RightCont = styled.div`
@@ -59,12 +63,18 @@ const MovieTitle = styled.h3`
   font-size: 1.4rem;
   color: ${colors.fontColor};
   margin: 0 0 10px 0;
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const MovieGenres = styled.p`
   color: ${colors.primaryColor};
   font-size: 0.9rem;
   margin: 0 0 10px 0;
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
+  }
 `;
 
 const MovieOverview = styled.p`
@@ -72,14 +82,19 @@ const MovieOverview = styled.p`
   color: ${colors.fontColor};
   flex-grow: 1;
   margin: 0 0 10px 0;
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const MovieDate = styled.p`
   font-size: 0.9rem;
   color: ${colors.primaryColor};
   margin: 0;
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
+  }
 `;
-
 const MovieRating = styled.span`
   position: absolute;
   top: 10px;
@@ -88,6 +103,12 @@ const MovieRating = styled.span`
   color: white;
   padding: 5px 10px;
   font-weight: bold;
-  padding: 5px 10px;
-  font-weight: bold;
+  border-radius: 6px;
+
+  @media (max-width: 768px) {
+    top: auto;
+    right: auto;
+    bottom: 10px;
+    left: 10px;
+  }
 `;
