@@ -47,6 +47,9 @@ const LeftCont = styled.div`
     width: 100%;
     height: auto;
   }
+  @media (max-width: 1024px) {
+    width: 175px;
+  }
 
   @media (max-width: 768px) {
     width: 150px;
@@ -63,6 +66,9 @@ const MovieTitle = styled.h3`
   font-size: 1.4rem;
   color: ${colors.fontColor};
   margin: 0 0 10px 0;
+  @media (max-width: 1024px) {
+    font-size: 1.2rem;
+  }
   @media (max-width: 768px) {
     font-size: 1rem;
   }
@@ -72,6 +78,9 @@ const MovieGenres = styled.p`
   color: ${colors.primaryColor};
   font-size: 0.9rem;
   margin: 0 0 10px 0;
+  @media (max-width: 1024px) {
+    font-size: 0.8rem;
+  }
   @media (max-width: 768px) {
     font-size: 0.7rem;
   }
@@ -82,6 +91,10 @@ const MovieOverview = styled.p`
   color: ${colors.fontColor};
   flex-grow: 1;
   margin: 0 0 10px 0;
+
+  @media (max-width: 1024px) {
+    font-size: 0.9rem;
+  }
   @media (max-width: 768px) {
     font-size: 0.8rem;
   }
@@ -91,6 +104,9 @@ const MovieDate = styled.p`
   font-size: 0.9rem;
   color: ${colors.primaryColor};
   margin: 0;
+  @media (max-width: 1024px) {
+    font-size: 0.8rem;
+  }
   @media (max-width: 768px) {
     font-size: 0.7rem;
   }
