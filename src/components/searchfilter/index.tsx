@@ -1,3 +1,5 @@
+//backup till here
+
 import React from "react";
 import styled, { css } from "styled-components";
 
@@ -6,6 +8,7 @@ import ExpandableFilters from "../expandablefilters";
 import SearchBar from "../searchbar/index";
 import CheckBox from "../checkbox";
 import { useMovieContext } from "../../contexts/MovieContext";
+import { ratingOptions } from "../../lib/data";
 
 // Add types for the props of 'SearchFilters' and the styled component 'SearchFiltersCont'
 type SearchFiltersProps = {
@@ -20,7 +23,7 @@ interface SearchFiltersContProps {
 }
 
 export default function SearchFilters() {
-  const { genres, ratingOptions } = useMovieContext();
+  const { genres, languages } = useMovieContext();
 
   console.log("lang options");
 
@@ -39,18 +42,23 @@ export default function SearchFilters() {
         </ExpandableFilters>
 
         <ExpandableFilters title="Select min. vote">
-          {genres.map((genre: any) => (
-            <CheckBox key={genre.id} value={genre.name} />
+          {ratingOptions.map((options: any) => (
+            <CheckBox key={options.id} value={String(options.name)} />
           ))}
         </ExpandableFilters>
-        {/* 
-        <ExpandableFilters title="Select language">
-          {languages.map((language: any) => (
-            <CheckBox key={crypto.randomUUID()} value={language.name} />
-          ))}
-        </ExpandableFilters> */}
 
-        {/* Implement a component called "ExpandableFilters" and use it for the filter categories */}
+        <ExpandableFilters title="Select language">
+          {languages
+            .sort((a, b) => a.english_name.localeCompare(b.english_name))
+            .map((language: any) => (
+              <CheckBox
+                key={language.iso_639_1}
+                value={`${
+                  language.english_name
+                } - ${language.iso_639_1.toUpperCase()}`}
+              />
+            ))}
+        </ExpandableFilters>
       </SearchFiltersCont>
     </FiltersWrapper>
   );
@@ -70,6 +78,11 @@ const SearchFiltersCont = styled.div<SearchFiltersContProps>`
   padding: 20px;
   border-radius: 3px;
   transition: all 0.3s ease-in-out;
+
+  @media (max-width: 768px) {
+    background-color: ${colors.lightBackground};
+    padding: 20px 0;
+  }
 
   ${({ marginBottom }) =>
     marginBottom &&

@@ -1,3 +1,5 @@
+//backup to here
+
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
@@ -29,12 +31,7 @@ export default function Discover() {
       <MobileHeader title="Discover" />
       <DiscoverWrapper>
         <MovieFilters>
-          <SearchFilters
-          // genres={genres}
-          // ratings={ratingOptions}
-          // languages={languageOptions}
-          // searchMovies={searchMovies}
-          />
+          <SearchFilters />
         </MovieFilters>
         <MovieResults>
           {totalCount > 0 && <TotalCounter>{totalCount} movies</TotalCounter>}
@@ -70,16 +67,3 @@ const MovieFilters = styled.div`
   margin-top: 20px;
   margin-bottom: 20px;
 `;
-// const MobilePageTitle = styled.header`
-//   display: fixed;
-//   top: 0;
-//   left: 0;
-//   font-size: 24px;
-//   font-weight: bold;
-//   /* margin-bottom: 20px; */
-//   color: ${colors.fontColor};
-
-//   @media (min-width: 768px) {
-//     display: none;
-//   }
-// `;

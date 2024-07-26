@@ -89,3 +89,8 @@ export interface Languages {
   english_name: string;
   name: string;
 }
+
+export interface RatingOptions {
+  id: number;
+  name: number;
+}

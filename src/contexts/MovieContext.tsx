@@ -17,7 +17,6 @@ import {
 interface MovieContextType {
   genres: Genre[];
   languageOptions: { id: string; name: string }[];
-  ratingOptions: { id: number; name: number }[];
   totalCount: number;
   results: MovieSummary[];
   movieDetails: MovieDetails | null;
@@ -37,6 +36,8 @@ interface MovieContextType {
   setYear: (year: number) => void;
   languages: Languages[];
   setLanguages: (languages: Languages[]) => void;
+  isFilterOpen: boolean;
+  setIsFilterOpen: (isOpen: boolean) => void;
 }
 
 const MovieContext = createContext<MovieContextType | undefined>(undefined);
@@ -49,14 +50,14 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [year, setYear] = useState<number>(0);
   const [activeSideBar, setActiveSideBar] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+
   const [genres, setGenres] = useState<Genre[]>([]);
   const [languages, setLanguages] = useState<Languages[]>([]);
   const [languageOptions, setLanguageOptions] = useState<
     { id: string; name: string }[]
   >([]);
-  const [ratingOptions, setRatingOptions] = useState<
-    { id: number; name: number }[]
-  >([]);
+
   const [totalCount, setTotalCount] = useState(0);
   const [results, setResults] = useState<MovieSummary[]>([]);
   const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null);
@@ -71,10 +72,10 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
     const fetchInitialData = async () => {
       setIsLoading(true);
       try {
-        const [popMovies, fetchedGenres] = await Promise.all([
+        const [popMovies, fetchedGenres, langs] = await Promise.all([
           searchPopularMovies(),
           searchGenres(),
-          //   searchLanguages(),
+          searchLanguages(),
         ]);
         console.log(
           "contextinitial ====>> popular & genres",
@@ -155,17 +156,17 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
     }
   };
 
-  //   const searchLanguages = async (): Promise<void> => {
-  //     try {
-  //       const languages = await fetcher.getLanguages();
-  //       console.log("🎣 CONTEXT[searchLanguages] ===>>>", languages);
-  //       setLanguages(languages);
-  //     } catch (error) {
-  //       console.error("Error fetching languages:", error);
-  //       setError("Failed to fetch languages");
-  //       throw error;
-  //     }
-  //   };
+  const searchLanguages = async (): Promise<void> => {
+    try {
+      const languages = await fetcher.getLanguages();
+      console.log("🎣 CONTEXT[searchLanguages] ===>>>", languages);
+      setLanguages(languages);
+    } catch (error) {
+      console.error("Error fetching languages:", error);
+      setError("Failed to fetch languages");
+      throw error;
+    }
+  };
 
   const getGenreNames = (genreIds: number[]): string => {
     if (!genres || genres.length === 0) return "";
@@ -180,7 +181,6 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
       value={{
         genres,
         languageOptions,
-        ratingOptions,
         totalCount,
         results,
         movieDetails,
@@ -200,6 +200,8 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
         setYear,
         languages,
         setLanguages,
+        isFilterOpen,
+        setIsFilterOpen,
       }}
     >
       {children}
