@@ -13,6 +13,11 @@ export default function MovieItem({ movie }: MovieItemProps) {
 
   const movieGenres = genres?.length > 0 ? getGenreNames(movie.genre_ids) : "";
 
+  // const truncateText = (text: string, maxLength: number) => {
+  //   if (text.length <= maxLength) return text;
+  //   return text.slice(0, maxLength) + "...";
+  // };
+
   return (
     <MovieItemWrapper>
       <LeftCont>
@@ -91,12 +96,20 @@ const MovieOverview = styled.p`
   color: ${colors.fontColor};
   flex-grow: 1;
   margin: 0 0 10px 0;
+  /* border: 1px solid red; */
+  max-height: 180px;
+
+  overflow-y: auto;
+  text-overflow: ellipsis;
+  display: -webkit-box;
 
   @media (max-width: 1024px) {
     font-size: 0.9rem;
+    max-height: 170px;
   }
   @media (max-width: 768px) {
     font-size: 0.8rem;
+    max-height: 150px;
   }
 `;
 

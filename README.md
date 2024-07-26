@@ -77,3 +77,4 @@ Please create a git repository of your solution and send the link to your contac
 18. Added debounce of 3 seconds for movie search (hooks.ts). Also only have the genres expanded by default if screen is > 1024. This way on mobile devices even if filter is expanded, it begins with collapsed option
 19. MovieItem styled to fit wireframe for desktop view, mostly margin/padding
 20. MovieItem styled better for mobile, text slightly smaller. Rating bottom left so it does not overlap title
+21. Added fixed height for movieoverview content. Had a bit of difficulty here, for now just added overflow-y: auto

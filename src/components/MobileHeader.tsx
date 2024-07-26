@@ -15,7 +15,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({ title }) => {
       <NavToggleButton activeSideBar={activeSideBar} onClick={toggleSideBar}>
         {"☰"}
       </NavToggleButton>
-      <PageTitle>{title}</PageTitle>
+      <PageTitle activeSideBar={activeSideBar}>{title}</PageTitle>
     </HeaderWrapper>
   );
 };
@@ -51,11 +51,13 @@ const NavToggleButton = styled.button<{ activeSideBar: boolean }>`
   transition: transform 0.3s ease-in-out;
 `;
 
-const PageTitle = styled.h1`
+const PageTitle = styled.h1<{ activeSideBar: boolean }>`
   font-size: 2rem;
   /* font-weight: bold; */
   color: ${colors.fontColor};
   margin: 0;
+  font-size: ${(props) => (props.activeSideBar ? "1rem" : "2rem")};
+  transition: font-size 0.3 ease-in-out;
 `;
 
 export default MobileHeader;
