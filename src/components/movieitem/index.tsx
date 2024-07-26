@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import * as colors from "../../colors";
 import { MovieSummary, Genre } from "../../lib/types";
 import { useMovieContext } from "../../contexts/MovieContext";
+import MovieModal from "../MovieModal";
 
 type MovieItemProps = {
   movie: MovieSummary;
@@ -10,11 +11,20 @@ type MovieItemProps = {
 
 export default function MovieItem({ movie }: MovieItemProps) {
   const { getGenreNames, genres } = useMovieContext();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const movieGenres = genres?.length > 0 ? getGenreNames(movie.genre_ids) : "";
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
-    <MovieItemWrapper>
+    <MovieItemWrapper onClick={openModal}>
       <LeftCont>
         <img
           src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
@@ -28,6 +38,7 @@ export default function MovieItem({ movie }: MovieItemProps) {
         <MovieDate>{movie.release_date}</MovieDate>
       </RightCont>
       <MovieRating>{movie.vote_average.toFixed(1)}</MovieRating>
+      {isModalOpen && <MovieModal movie={movie} onClose={closeModal} />}
     </MovieItemWrapper>
   );
 }
@@ -38,6 +49,11 @@ const MovieItemWrapper = styled.div`
   display: flex;
   margin-bottom: 20px;
   padding: 20px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${colors.lightBackground};
+  }
 `;
 
 const LeftCont = styled.div`
@@ -129,7 +145,7 @@ const MovieRating = styled.span`
   font-weight: bold;
   border-radius: 6px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1200px) {
     top: auto;
     right: auto;
     bottom: 10px;

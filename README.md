@@ -78,3 +78,4 @@ Please create a git repository of your solution and send the link to your contac
 19. MovieItem styled to fit wireframe for desktop view, mostly margin/padding
 20. MovieItem styled better for mobile, text slightly smaller. Rating bottom left so it does not overlap title
 21. Added fixed height for movieoverview content. Had a bit of difficulty here, for now just added overflow-y: auto
+22. Added modal, whole movieitem wrapper is clickable to show modal. Also altered at what width the rating shows on the bottom left (To not overlap title)
