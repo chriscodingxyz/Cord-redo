@@ -3,6 +3,10 @@
 1. Clone this repo
 2. `npm i --legacy-peer-deps` to install dependencies. Node v16^ preferable
 
+### Quick video preview (link will expire after mid August 2024)
+
+- https://we.tl/t-bfYKPYlkEj
+
 # Steps taken
 
 1. updated scripts for legacy and installed legacy deps
