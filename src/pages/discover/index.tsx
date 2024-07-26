@@ -15,7 +15,6 @@ export default function Discover() {
   const {
     genres,
     languageOptions,
-    ratingOptions,
     totalCount,
     results,
     isLoading,
@@ -29,7 +28,7 @@ export default function Discover() {
   return (
     <>
       <MobileHeader title="Discover" />
-      <DiscoverWrapper>
+      <DiscoverWrapper className="discover-page">
         <MovieFilters>
           <SearchFilters />
         </MovieFilters>
@@ -66,4 +65,8 @@ const MovieResults = styled.div``;
 const MovieFilters = styled.div`
   margin-top: 20px;
   margin-bottom: 20px;
+
+  @media (max-width: 1024px) {
+    margin-bottom: 0px;
+  }
 `;

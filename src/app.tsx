@@ -7,28 +7,22 @@ import SideNavBar from "./components/sidenavbar";
 import Discover from "./pages/discover";
 
 import "./css/app.css";
-import { useMovieContext } from "./contexts/MovieContext";
+import { MovieProvider, useMovieContext } from "./contexts/MovieContext";
 
 export default function App() {
-  // const { activeSideBar, toggleSideBar } = useMovieContext();
-
   return (
-    <Router>
-      <PageContainer>
-        <SideNavBar />
-        <ContentWrapper>
-          {/* <NavToggleButton
-            onClick={toggleSideBar}
-            activeSideBar={activeSideBar}
-          >
-            {activeSideBar ? "✕" : "☰"}
-          </NavToggleButton> */}
-          <Switch>
-            <Route path="/discover" component={Discover} />
-          </Switch>
-        </ContentWrapper>
-      </PageContainer>
-    </Router>
+    <MovieProvider>
+      <Router>
+        <PageContainer>
+          <SideNavBar />
+          <ContentWrapper>
+            <Switch>
+              <Route path="/discover" component={Discover} />
+            </Switch>
+          </ContentWrapper>
+        </PageContainer>
+      </Router>
+    </MovieProvider>
   );
 }
 

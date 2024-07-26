@@ -15,7 +15,7 @@ interface NavIconProps {
 export default function SideNavBar() {
   const { activeSideBar } = useMovieContext();
   return (
-    <SideNavBarCont activeSideBar={activeSideBar}>
+    <SideNavBarCont className="side-nav-bar" activeSideBar={activeSideBar}>
       <SideNavMainLink
         className="menu_nav_link main_nav_link"
         to="/"

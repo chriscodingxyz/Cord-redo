@@ -73,3 +73,4 @@ Please create a git repository of your solution and send the link to your contac
 14. Partiall built out ExpandableFilters, Checkbox, mapped over genres only for now. I have some type issues in MovieContext I will fix after this push.
 15. Wireframe does not show padding/margin for mobile view, however there seems to be less on mobile view. I have taken that into account and decreased discover wrapper padding
 16. Finished mapping out filter options
+17. Filter options toggle added. Jest tests added (ChatGPT guidance on tests, a bit rusty writing tests)

@@ -5,6 +5,7 @@ import * as colors from "../../colors";
 import SearchIcon from "../../images/search-icon-yellow.png";
 import CalendarIcon from "../../images/year-icon.png";
 import { useMovieContext } from "../../contexts/MovieContext";
+import FilterIcon from "../../images/filter-icon.png";
 
 export default function SearchBar() {
   const {
@@ -14,6 +15,8 @@ export default function SearchBar() {
     setYear,
     searchMovies,
     searchPopularMovies,
+    isFilterOpen,
+    setIsFilterOpen,
   } = useMovieContext();
 
   useEffect(() => {
@@ -41,6 +44,12 @@ export default function SearchBar() {
     }
   };
 
+  const toggleFilter = () => {
+    if (window.innerWidth < 1024) {
+      setIsFilterOpen((prev) => !prev);
+    }
+  };
+
   return (
     <FlexColDiv>
       <SearchInputWrapper>
@@ -51,17 +60,24 @@ export default function SearchBar() {
           placeholder="Search for movies"
         />
         <SearchIconImg src={SearchIcon} alt="Search" />
+        {window.innerWidth < 1024 && (
+          <FilterToggleButton onClick={toggleFilter}>
+            <FilterIconImg src={FilterIcon} alt="Filter" />
+          </FilterToggleButton>
+        )}
       </SearchInputWrapper>
-      <SearchInputWrapper>
-        <SearchInput
-          type="text"
-          value={year === 0 ? "" : year}
-          onChange={handleYearChange}
-          placeholder="Year of release"
-          maxLength={4}
-        />
-        <SearchIconImg src={CalendarIcon} alt="Calendar" />
-      </SearchInputWrapper>
+      {isFilterOpen && (
+        <SearchInputWrapper>
+          <SearchInput
+            type="text"
+            value={year === 0 ? "" : year}
+            onChange={handleYearChange}
+            placeholder="Year of release"
+            maxLength={4}
+          />
+          <SearchIconImg src={CalendarIcon} alt="Calendar" />
+        </SearchInputWrapper>
+      )}
     </FlexColDiv>
   );
 }
@@ -103,5 +119,19 @@ const SearchIconImg = styled.img`
   position: absolute;
   left: 0px;
   height: 25px;
+  width: auto;
+`;
+
+const FilterToggleButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  position: absolute;
+  right: 0;
+`;
+
+const FilterIconImg = styled.img`
+  height: 30px;
   width: auto;
 `;

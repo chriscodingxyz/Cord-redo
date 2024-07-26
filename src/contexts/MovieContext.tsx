@@ -4,6 +4,7 @@ import React, {
   useContext,
   useEffect,
   ReactNode,
+  useCallback,
 } from "react";
 import * as fetcher from "../fetcher";
 import {
@@ -37,7 +38,7 @@ interface MovieContextType {
   languages: Languages[];
   setLanguages: (languages: Languages[]) => void;
   isFilterOpen: boolean;
-  setIsFilterOpen: (isOpen: boolean) => void;
+  setIsFilterOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const MovieContext = createContext<MovieContextType | undefined>(undefined);
@@ -50,7 +51,9 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [year, setYear] = useState<number>(0);
   const [activeSideBar, setActiveSideBar] = useState(false);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState<boolean>(
+    window.innerWidth >= 1024
+  );
 
   const [genres, setGenres] = useState<Genre[]>([]);
   const [languages, setLanguages] = useState<Languages[]>([]);
@@ -77,11 +80,6 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
           searchGenres(),
           searchLanguages(),
         ]);
-        console.log(
-          "contextinitial ====>> popular & genres",
-          popMovies,
-          fetchedGenres
-        );
       } catch (error) {
         console.error("Error fetching initial data:", error);
         setError("Failed to load initial data");
@@ -94,10 +92,6 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    console.log("Genres updated:", genres);
-  }, [genres]);
-
-  useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 768) {
         setActiveSideBar(false);
@@ -108,6 +102,19 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
     handleResize();
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const handleResize = useCallback(() => {
+    if (window.innerWidth >= 1024) {
+      setIsFilterOpen(true);
+    } else {
+      setIsFilterOpen(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [handleResize]);
 
   const searchPopularMovies = async (): Promise<void> => {
     try {
@@ -124,7 +131,7 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
   const searchGenres = async (): Promise<void> => {
     try {
       const genres = await fetcher.getMovieGenres();
-      console.log("🎣 CONTEXT[searchGenres] ===>>>", genres);
+      // console.log("🎣 CONTEXT[searchGenres] ===>>>", genres);
       setGenres(genres);
     } catch (error) {
       console.error("Error fetching genres:", error);
@@ -159,7 +166,7 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
   const searchLanguages = async (): Promise<void> => {
     try {
       const languages = await fetcher.getLanguages();
-      console.log("🎣 CONTEXT[searchLanguages] ===>>>", languages);
+      // console.log("🎣 CONTEXT[searchLanguages] ===>>>", languages);
       setLanguages(languages);
     } catch (error) {
       console.error("Error fetching languages:", error);

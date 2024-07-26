@@ -21,7 +21,7 @@ export const getMovieGenres = async () => {
     const { data } = await axios.get(
       `${BASE_URL}/genre/movie/list?api_key=${MOVIE_DB_KEY}`
     );
-    console.log("🎣 FETCHER[getMovieGenres] ===>>>", data.genres);
+    // console.log("🎣 FETCHER[getMovieGenres] ===>>>", data.genres);
     return data.genres;
   } catch (error) {
     return handleError(error as AxiosError);
@@ -34,7 +34,7 @@ export const getPopularMovies = async (page = 1) => {
     const { data } = await axios.get(
       `${BASE_URL}/movie/popular?page=${page}&api_key=${MOVIE_DB_KEY}`
     );
-    console.log("🎣 FETCHER[getPopularMovies] ===>>>", data);
+    // console.log("🎣 FETCHER[getPopularMovies] ===>>>", data);
     return data;
   } catch (error) {
     return handleError(error as AxiosError);
@@ -47,7 +47,7 @@ export const getMovieByID = async (movieId: number) => {
     const { data } = await axios.get(
       `${BASE_URL}/movie/${movieId}?api_key=${MOVIE_DB_KEY}`
     );
-    console.log("🎣 FETCHER[getMovieByID] ===>>>", data);
+    // console.log("🎣 FETCHER[getMovieByID] ===>>>", data);
     return data;
   } catch (error) {
     return handleError(error as AxiosError);
@@ -62,8 +62,7 @@ export const getMovies = async (keyword: string, year = 0, page = 1) => {
     const { data } = await axios.get(
       `${BASE_URL}/search/movie?api_key=${MOVIE_DB_KEY}&query=${keyword}&page=${page}&year=${year}`
     );
-    console.log("🎣 FETCHER[getMovies] ===>>>", data);
-    // alert(url);
+    // console.log("🎣 FETCHER[getMovies] ===>>>", data);
 
     return data;
   } catch (error) {

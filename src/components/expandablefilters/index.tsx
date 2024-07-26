@@ -20,9 +20,16 @@ export default function ExpandableFilters({
     <>
       <TitleButtonWrapper>
         <ExpandButton onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? "-" : "+"}
+          {isOpen ? (
+            <>
+              -<span>{title}</span>
+            </>
+          ) : (
+            <>
+              +<span>{title}</span>
+            </>
+          )}
         </ExpandButton>
-        <h4>{title}</h4>
       </TitleButtonWrapper>
 
       <ExpandableDiv isOpen={isOpen}>{children}</ExpandableDiv>
@@ -34,6 +41,7 @@ export default function ExpandableFilters({
 
 const ExpandableDiv = styled.div<{ isOpen: boolean }>`
   display: ${({ isOpen }) => (isOpen ? "block" : "none")};
+  padding: 15px 0;
 `;
 
 const TitleButtonWrapper = styled.div`
@@ -44,11 +52,20 @@ const TitleButtonWrapper = styled.div`
 `;
 
 const ExpandButton = styled.button`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
   border: 0px;
   padding-left: 0px;
   background-color: transparent;
   font-size: 1.6em;
   font-weight: 700;
-  width: 30px;
   cursor: pointer;
+
+  span {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-left: 10px;
+  }
 `;
