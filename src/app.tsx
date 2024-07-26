@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import styled, { css } from "styled-components";
 
 import SideNavBar from "./components/sidenavbar";
@@ -18,6 +23,7 @@ export default function App() {
           <ContentWrapper>
             <Switch>
               <Route path="/discover" component={Discover} />
+              <Redirect from="/" to="/discover" exact />
             </Switch>
           </ContentWrapper>
         </PageContainer>
