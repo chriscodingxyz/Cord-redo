@@ -6,6 +6,7 @@ import SearchIcon from "../../images/search-icon-yellow.png";
 import CalendarIcon from "../../images/year-icon.png";
 import { useMovieContext } from "../../contexts/MovieContext";
 import FilterIcon from "../../images/filter-icon.png";
+import { useDebounce } from "../../lib/hooks";
 
 export default function SearchBar() {
   const {
@@ -19,20 +20,19 @@ export default function SearchBar() {
     setIsFilterOpen,
   } = useMovieContext();
 
+  const debouncedSearchQuery = useDebounce(searchQuery, 300);
+
   useEffect(() => {
-    if (!searchQuery) {
+    if (!debouncedSearchQuery) {
       searchPopularMovies();
+    } else {
+      searchMovies(debouncedSearchQuery, year || 0);
     }
-  }, [searchQuery]);
+  }, [debouncedSearchQuery, year]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newQuery = e.target.value;
     setSearchQuery(newQuery);
-    if (newQuery) {
-      searchMovies(newQuery, year || 0);
-    } else {
-      searchPopularMovies();
-    }
   };
 
   const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,7 +61,10 @@ export default function SearchBar() {
         />
         <SearchIconImg src={SearchIcon} alt="Search" />
         {window.innerWidth < 1024 && (
-          <FilterToggleButton onClick={toggleFilter}>
+          <FilterToggleButton
+            isFilterOpen={isFilterOpen}
+            onClick={toggleFilter}
+          >
             <FilterIconImg src={FilterIcon} alt="Filter" />
           </FilterToggleButton>
         )}
@@ -122,13 +125,15 @@ const SearchIconImg = styled.img`
   width: auto;
 `;
 
-const FilterToggleButton = styled.button`
+const FilterToggleButton = styled.button<{ isFilterOpen: boolean }>`
   background: none;
   border: none;
   cursor: pointer;
   padding: 5px;
   position: absolute;
   right: 0;
+  transform: ${(props) => (props.isFilterOpen ? "rotate(90deg)" : "rotate(0)")};
+  transition: transform 0.3s ease-in-out;
 `;
 
 const FilterIconImg = styled.img`

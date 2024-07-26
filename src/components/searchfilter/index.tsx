@@ -34,7 +34,10 @@ export default function SearchFilters() {
         <SearchFiltersCont>
           <CategoryTitle>Movie</CategoryTitle>
 
-          <ExpandableFilters title="Select genre(s)" open>
+          <ExpandableFilters
+            title="Select genre(s)"
+            open={window.innerWidth > 1024}
+          >
             {genres.map((genre: any) => (
               <CheckBox key={genre.id} value={genre.name} />
             ))}
