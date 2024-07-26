@@ -1,3 +1,44 @@
+### Setup guide
+
+1. Clone this repo
+2. `npm i --legacy-peer-deps` to install dependencies. Node v16^ preferable
+
+# Steps taken
+
+1. updated scripts for legacy and installed legacy deps
+2. updated evertyhing to box-sizing: border box (more accepted standard)
+3. Filled up fetcher data using axios
+4. Added all types from movies/genres into lib/types.ts
+5. Media queries and activeSideBar state for displaying/hiding sidenavbar. Also some spacing/margin updated. For now I will keep most state within app.tsx and move down or put into context/local storage later if needed
+6. Sidebar components styled
+7. Updated whole app, made MovieContext. Also temporarily fixed most of the errors by adding any type (temporary)
+8. Fixed some issues with Genres, as there is a WHOLE genre list, and a movie specific one. Also the movie specific ones only mentioned Genre ID not name. Movielist and MovieItems have been styled. All filter/search components next. (padding/margin will still be updated towards the end)
+9. Deleted MobileTitle component and extracted away a new component, MobileHeader.tsx, this will allow a title prop to be passed for different pages. This also places the open/close sidebarnav button to the left of it. Also I decided to add a white background and fix it to the top for when users scroll, they always have option to display sidebar. Also updated sidebar z-index after realising an error
+10. Fixed MobileHeader and button. Have added conditional padding-left, no whitespace now when opening sidebar. Also button rotates 90degrees to keep the same spacing and no shift in design, except for intentional shift to the right when sidebar expands.
+11. Getting closer to final layout of discover, currently have a flex display style for movie content and filters. I will likely also make the filters stay fixed on the screen, both for row and column displays.
+12. Building out the search logic for now, adding values in context so it stays there on any re-renders
+13. Added Search feature, will not search if ONLY year. Will not make a new search if year does not have 4 numbers. If search is cleared, it fetches popular movies. Will add some debounce or see if there is a more modern method online
+14. Partiall built out ExpandableFilters, Checkbox, mapped over genres only for now. I have some type issues in MovieContext I will fix after this push.
+15. Wireframe does not show padding/margin for mobile view, however there seems to be less on mobile view. I have taken that into account and decreased discover wrapper padding
+16. Finished mapping out filter options
+17. Filter options toggle added. Jest tests added (ChatGPT guidance on tests, a bit rusty writing tests)
+18. Added debounce of 3 seconds for movie search (hooks.ts). Also only have the genres expanded by default if screen is > 1024. This way on mobile devices even if filter is expanded, it begins with collapsed option
+19. MovieItem styled to fit wireframe for desktop view, mostly margin/padding
+20. MovieItem styled better for mobile, text slightly smaller. Rating bottom left so it does not overlap title
+21. Added fixed height for movieoverview content. Had a bit of difficulty here, for now just added overflow-y: auto
+22. Added modal, whole movieitem wrapper is clickable to show modal. Also altered at what width the rating shows on the bottom left (To not overlap title)
+
+# Info
+
+1. Added 3 second debounce to limit api requests to search query
+2. Only genre expandable filters is expanded by default (collapsed on mobile view)
+3. Modal window accessed by clicking MovieItem wrapper
+4. Automatically renders popular movies
+5. When user deletes search query, the popular movies are refetched.
+6. Responsive text-sizes for main content
+7. Sliding sidebar nav
+8. ContextAPI for state management
+
 # Cohire Coding Challenge (Frontend)
 
 ## Last Updated
@@ -54,39 +95,3 @@ Please create a git repository of your solution and send the link to your contac
 
 [mockup]: https://cord-coding-challenges.s3-eu-west-1.amazonaws.com/frontend-test-mockups.zip
 [theMovieDB]: https://www.themoviedb.org/documentation/api
-
-# Steps taken
-
-1. updated scripts for legacy and installed legacy deps
-2. updated evertyhing to box-sizing: border box (more accepted standard)
-3. Filled up fetcher data using axios
-4. Added all types from movies/genres into lib/types.ts
-5. Media queries and activeSideBar state for displaying/hiding sidenavbar. Also some spacing/margin updated. For now I will keep most state within app.tsx and move down or put into context/local storage later if needed
-6. Sidebar components styled
-7. Updated whole app, made MovieContext. Also temporarily fixed most of the errors by adding any type (temporary)
-8. Fixed some issues with Genres, as there is a WHOLE genre list, and a movie specific one. Also the movie specific ones only mentioned Genre ID not name. Movielist and MovieItems have been styled. All filter/search components next. (padding/margin will still be updated towards the end)
-9. Deleted MobileTitle component and extracted away a new component, MobileHeader.tsx, this will allow a title prop to be passed for different pages. This also places the open/close sidebarnav button to the left of it. Also I decided to add a white background and fix it to the top for when users scroll, they always have option to display sidebar. Also updated sidebar z-index after realising an error
-10. Fixed MobileHeader and button. Have added conditional padding-left, no whitespace now when opening sidebar. Also button rotates 90degrees to keep the same spacing and no shift in design, except for intentional shift to the right when sidebar expands.
-11. Getting closer to final layout of discover, currently have a flex display style for movie content and filters. I will likely also make the filters stay fixed on the screen, both for row and column displays.
-12. Building out the search logic for now, adding values in context so it stays there on any re-renders
-13. Added Search feature, will not search if ONLY year. Will not make a new search if year does not have 4 numbers. If search is cleared, it fetches popular movies. Will add some debounce or see if there is a more modern method online
-14. Partiall built out ExpandableFilters, Checkbox, mapped over genres only for now. I have some type issues in MovieContext I will fix after this push.
-15. Wireframe does not show padding/margin for mobile view, however there seems to be less on mobile view. I have taken that into account and decreased discover wrapper padding
-16. Finished mapping out filter options
-17. Filter options toggle added. Jest tests added (ChatGPT guidance on tests, a bit rusty writing tests)
-18. Added debounce of 3 seconds for movie search (hooks.ts). Also only have the genres expanded by default if screen is > 1024. This way on mobile devices even if filter is expanded, it begins with collapsed option
-19. MovieItem styled to fit wireframe for desktop view, mostly margin/padding
-20. MovieItem styled better for mobile, text slightly smaller. Rating bottom left so it does not overlap title
-21. Added fixed height for movieoverview content. Had a bit of difficulty here, for now just added overflow-y: auto
-22. Added modal, whole movieitem wrapper is clickable to show modal. Also altered at what width the rating shows on the bottom left (To not overlap title)
-
-# Info
-
-1. Added 3 second debounce to limit api requests to search query
-2. Only genre expandable filters is expanded by default (collapsed on mobile view)
-3. Modal window accessed by clicking MovieItem wrapper
-4. Automatically renders popular movies
-5. When user deletes search query, the popular movies are refetched.
-6. Responsive text-sizes for main content
-7. Sliding sidebar nav
-8. ContextAPI for state management
