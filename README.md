@@ -75,3 +75,4 @@ Please create a git repository of your solution and send the link to your contac
 16. Finished mapping out filter options
 17. Filter options toggle added. Jest tests added (ChatGPT guidance on tests, a bit rusty writing tests)
 18. Added debounce of 3 seconds for movie search (hooks.ts). Also only have the genres expanded by default if screen is > 1024. This way on mobile devices even if filter is expanded, it begins with collapsed option
+19. MovieItem styled to fit wireframe for desktop view, mostly margin/padding

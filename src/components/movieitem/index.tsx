@@ -37,9 +37,12 @@ const MovieItemWrapper = styled.div`
   background-color: white;
   display: flex;
   margin-bottom: 20px;
+  padding: 20px;
 `;
 
 const LeftCont = styled.div`
+  width: 200px;
+  margin-right: 20px;
   img {
     width: 100%;
     height: auto;
@@ -48,7 +51,6 @@ const LeftCont = styled.div`
 
 const RightCont = styled.div`
   flex: 1;
-  padding: 1.3rem;
   display: flex;
   flex-direction: column;
 `;
@@ -56,22 +58,26 @@ const RightCont = styled.div`
 const MovieTitle = styled.h3`
   font-size: 1.4rem;
   color: ${colors.fontColor};
+  margin: 0 0 10px 0;
 `;
 
 const MovieGenres = styled.p`
   color: ${colors.primaryColor};
   font-size: 0.9rem;
+  margin: 0 0 10px 0;
 `;
 
 const MovieOverview = styled.p`
   font-size: 1rem;
   color: ${colors.fontColor};
   flex-grow: 1;
+  margin: 0 0 10px 0;
 `;
 
 const MovieDate = styled.p`
   font-size: 0.9rem;
   color: ${colors.primaryColor};
+  margin: 0;
 `;
 
 const MovieRating = styled.span`
@@ -80,6 +86,8 @@ const MovieRating = styled.span`
   right: 10px;
   background-color: ${colors.primaryColor};
   color: white;
+  padding: 5px 10px;
+  font-weight: bold;
   padding: 5px 10px;
   font-weight: bold;
 `;
